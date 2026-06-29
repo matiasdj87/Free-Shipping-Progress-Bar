@@ -10,9 +10,9 @@
  * It is also available through the world-wide-web at this URL:
  * https://opensource.org/licenses/MIT
  *
- * @author    Ettore Stani
- * @copyright 2025 Ettore Stani
- * @license   https://opensource.org/licenses/MIT  MIT License
+ * @author     Ettore Stani
+ * @copyright  2025 Ettore Stani
+ * @license    https://opensource.org/licenses/MIT  MIT License
  */
 
 if (!defined('_PS_VERSION_')) {
@@ -672,8 +672,8 @@ class FreeShippingProgress extends Module
         $message = Configuration::get('FREESHIPPING_MESSAGE', $langId);
         $successMessage = Configuration::get('FREESHIPPING_SUCCESS_MESSAGE', $langId);
 
-        // Replace placeholder
-        $formattedAmount = Tools::displayPrice($remainingAmount);
+        // MODIFICACIÓN MODERNA PARA PS 1.7 / PS 8 (Evita error fatal de Tools::displayPrice)
+        $formattedAmount = Context::getContext()->currentLocale->formatPrice($remainingAmount, Context::getContext()->currency->iso_code);
         $message = str_replace('{remaining_amount}', $formattedAmount, $message);
 
         // Define colors - usa valori predefiniti se non impostati
